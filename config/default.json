@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://bin123:bin123@pridecluster-iqeyw.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://bin123:bin123@pridecluster-iqeyw.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "binsecret"
 }
