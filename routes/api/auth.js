@@ -45,7 +45,7 @@ router.post(
 
     // Destructure, pull out from req.body into same name var
     const { email, password } = req.body;
-
+    console.log(email + ' ' + password);
     try {
       // See if user exists
       let user = await User.findOne({ email });
