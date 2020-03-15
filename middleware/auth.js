@@ -17,6 +17,7 @@ module.exports = function(req, res, next) {
 
     // set the user to the request with the user returned from decoded token
     req.user = decoded.user;
+    console.log('User Authenticated');
     next();
   } catch (err) {
     res.status(401).json({ msg: 'Token is not valid' });

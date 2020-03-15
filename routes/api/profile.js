@@ -6,6 +6,7 @@ const request = require('request');
 const config = require('config');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 /**
  * @route   GET api/profile/me
@@ -15,7 +16,7 @@ const User = require('../../models/User');
 
 router.get('/me', auth, async (req, res) => {
   try {
-    const profile = await await Profile.findOne({
+    const profile = await Profile.findOne({
       user: req.user.id
     }).populate('user', ['name', 'avatar']);
 
@@ -166,7 +167,8 @@ router.get('/user/:user_id', async (req, res) => {
 
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - remove users posts
+    // Remove users posts
+    await Post.deleteMany({ user: req.user.id });
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove user
@@ -242,10 +244,11 @@ router.put(
   }
 );
 
-// @route   DELETE api/profile/education/:exp_id
+// @route   DELETE api/profile/experience/:exp_id
 // @desc    Delete experience from profile
 // @access  Private
-router.delete('/education/:exp_id', auth, async (req, res) => {
+router.delete('/experience/:exp_id', auth, async (req, res) => {
+  console.log('Activated experience delete');
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
@@ -259,6 +262,7 @@ router.delete('/education/:exp_id', auth, async (req, res) => {
     await profile.save();
 
     res.json(profile);
+    console.log('Experience deleted');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -328,7 +332,7 @@ router.put(
   }
 );
 
-// @route   DELETE api/profile/education/:exp_id
+// @route   DELETE api/profile/education/:edu_id
 // @desc    Delete education from profile
 // @access  Private
 router.delete('/education/:edu_id', auth, async (req, res) => {
@@ -338,7 +342,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     // Get remove index
     const removeIndex = profile.education
       .map(item => item.id)
-      .indexOf(req.params.exp_id);
+      .indexOf(req.params.edu_id);
 
     // splice to take something out
     profile.education.splice(removeIndex, 1);
