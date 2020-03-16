@@ -152,6 +152,10 @@ const CreateProfile = ({ createProfile }) => {
           </button>
           <span>Optional</span>
         </div>
+        <input type='submit' className='btn btn-primary my-1' />
+        <Link className='btn btn-light my-1' to='/dashboard'>
+          Go Back
+        </Link>
 
         {displaySocialInputs && (
           <Fragment>
@@ -209,10 +213,6 @@ const CreateProfile = ({ createProfile }) => {
                 onChange={e => onChange(e)}
               />
             </div>
-            <input type='submit' className='btn btn-primary my-1' />
-            <Link className='btn btn-light my-1' to='/dashboard'>
-              Go Back
-            </Link>
           </Fragment>
         )}
       </form>
