@@ -21,6 +21,10 @@ export const getCurrentProfile = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
+    // Due to security, we should clear profile if error, like not same user
+    dispatch({
+      type: CLEAR_PROFILE
+    });
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
@@ -60,7 +64,7 @@ export const getProfileById = userId => async dispatch => {
   }
 };
 // Get Github repos
-export const getGithubRepose = username => async dispatch => {
+export const getGithubRepos = username => async dispatch => {
   try {
     const res = await axios.get(`/api/profile/github/${username}`);
     dispatch({
