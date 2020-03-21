@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://bin123:bin123@pridecluster-iqeyw.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "binsecret",
+  "githubClientId": "67f8b820794db90ccc4a",
+  "githubSecret": "2b6cac8df2c79b7921fc869d742c0764afa721b4"
+}
